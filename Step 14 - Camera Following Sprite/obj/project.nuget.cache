@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "9jR3an7vCRdKtWTVE4ES5yNWY62pjxbNG5QJl0aCFr8AiURPzaf4Mc1/VqQ+6JHaK4LZ/a2xTWhcLsz3ZvbiCw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Besmith\\Development\\Learning-MonoGame\\Step 14 - Camera Following Sprite\\Step 14 - Camera Following Sprite.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Besmith\\.nuget\\packages\\monogame.content.builder\\3.7.0.4\\monogame.content.builder.3.7.0.4.nupkg.sha512",
+    "C:\\Users\\Besmith\\.nuget\\packages\\monogame.framework.desktopgl.core\\3.7.0.7\\monogame.framework.desktopgl.core.3.7.0.7.nupkg.sha512"
+  ],
+  "logs": []
+}
