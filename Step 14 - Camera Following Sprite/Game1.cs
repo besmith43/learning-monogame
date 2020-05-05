@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
+using System.Collections.Generic;
 
 namespace Step_14___Camera_Following_Sprite
 {
@@ -8,6 +10,16 @@ namespace Step_14___Camera_Following_Sprite
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        private Camera _camera;
+
+        private List<Component> _components;
+
+        private Player _player;
+
+        public static int ScreenHeight;
+
+        public static int ScreenWidth;
 
         public Game1()
         {
@@ -20,6 +32,10 @@ namespace Step_14___Camera_Following_Sprite
         {
             // TODO: Add your initialization logic here
 
+            ScreenHeight = graphics.PreferredBackBufferHeight;
+
+            ScreenWidth = graphics.PreferredBackBufferWidth;
+
             base.Initialize();
         }
 
@@ -27,15 +43,24 @@ namespace Step_14___Camera_Following_Sprite
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            _camera = new Camera();
+
+            _player = new Player(Content.Load<Texture2D>("Player"));
+
+            _components = new List<Component>()
+            {
+                new Sprite(Content.Load<Texture2D>("Background")),
+                _player,
+                new Sprite(Content.Load<Texture2D>("NPC")),
+            };
         }
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
+            foreach (var component in _components)
+                component.Update(gameTime);
 
-            // TODO: Add your update logic here
+            _camera.Follow(_player);
 
             base.Update(gameTime);
         }
@@ -45,6 +70,13 @@ namespace Step_14___Camera_Following_Sprite
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+
+            spriteBatch.Begin(transformMatrix: _camera.Transform);
+
+            foreach (var component in _components)
+                component.Draw(gameTime, spriteBatch);
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
